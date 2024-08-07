@@ -10,15 +10,13 @@ namespace Laboratorio_2
     {
 
         public int NumeroDeHabitacion { get; set; }
-        public int nombre { get; set; }
         public double PrecioPorNoche { get; set; }
         public bool disponible { get; set; }
         public string ClienteAsignado { get; set; }
 
-        public Habitación(int NumeroDeRoom, int nombre, double precioPorNoche, bool disponible, string clienteAsignado)
+        public Habitación(int NumeroDeRoom, double precioPorNoche, bool disponible, string clienteAsignado)
         {
             NumeroDeHabitacion = NumeroDeRoom;
-            this.nombre = nombre;
             PrecioPorNoche = precioPorNoche;
             this.disponible = disponible;
             ClienteAsignado = clienteAsignado;
