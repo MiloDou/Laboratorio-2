@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Laboratorio_2
 {
-    public class Habitación_Deluxe
+    
+    public class Habitación_Deluxe : Managment
     {
+
+        public int NumeroDeCamas { get; set; }
+
     }
 }
