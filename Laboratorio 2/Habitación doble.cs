@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Laboratorio_2
 {
-    public class Habitación_doble
+    public class Habitación_doble : M
     {
     }
 }

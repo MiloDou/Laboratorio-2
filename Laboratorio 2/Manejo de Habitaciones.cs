@@ -8,25 +8,33 @@ using System.Threading.Tasks;
 
 namespace Laboratorio_2
 {
-    public class Managment
+    public class Managment 
     {
-        
+        public List<Habitación> HabitaciónSimple;
+        public List<Habitación> HabitaciónDoble;
+        public List<Habitación> HabitaciónDeluxe;
+        public List<Habitación> Suite;
 
-        public int ID { get; set; }
-        public int nombre { get; set; }
-        public double PrecioPorNoche {  get; set; }
-        
-        public bool disponible { get; set; }
-        public string ClienteAsignado {  get; set; }
-
-        public Managment(int iD, int nombre, double precioPorNoche, bool disponible, string clienteAsignado)
+        public Managment()
         {
-            ID = iD;
-            this.nombre = nombre;
-            PrecioPorNoche = precioPorNoche;
-            this.disponible = disponible;
-            ClienteAsignado = clienteAsignado;
+            HabitaciónSimple = new List<Habitación>();
+            HabitaciónDoble  = new List<Habitación>();
+            HabitaciónDeluxe = new List<Habitación>();
+            Suite = new List<Habitación>();
 
+        }
+
+        
+        public void AddDoubleRoom()
+        {
+
+        }
+        public void AddDeulxeRoom()
+        {
+
+        }
+        public void AddSuiteRoom()
+        {
 
         }
         public void ShowRoom()
