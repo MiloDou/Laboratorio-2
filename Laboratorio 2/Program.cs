@@ -12,7 +12,6 @@ namespace HotelVillaReal
         class Program
         {
             static Managment manejo = new Managment();
-            static Habitación habitacion = new Habitación(0, 0);
 
             static void Main(string[] args)
             {
