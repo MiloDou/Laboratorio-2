@@ -6,49 +6,24 @@ using System.Threading.Tasks;
 
 namespace Laboratorio_2
 {
-    public class Habitacion_simple : Managment
+    public class HabitacionSimple : Habitación
     {
-        Managment Manejo = new Managment();
-        public List<int> NumeroDeCamas { get; set; }
+        public int NumeroDeCamas { get; set; }
 
-        public void AddSimpleRoom()
+        public HabitacionSimple(int numero, double precioPorNoche, int numeroDeCamas)
+            : base(numero, precioPorNoche)
         {
-            Console.Clear();
-            Console.WriteLine("-------------------------------");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("        HABITACIÓN DELUXE");
-            Console.ResetColor();
-            Console.WriteLine("-------------------------------\n");
-
-            Console.Write("Escribe Número de habitación");
-            int numerode = Convert.ToInt32(Console.ReadLine());
-            NumeroDeRoom(numerode);
-
-            Console.Write("Escribe Precio por Noche: ");
-            double precio = Convert.ToInt32(Console.ReadLine());
-            preciopornoche(precio);
-
-            Console.WriteLine("Escriba número de camas: ");
-            int camas = Convert.ToInt32(Console.ReadLine());
-            NumeroDeCamas(camas);
-
-            Console.Write("Escriba cliente asignado: ");
-            string cliente = Console.ReadLine();
-
-            Console.WriteLine("Esta disponible (y/n) ");
-            int y = Convert.ToInt32(Console.ReadLine());
-            bool Disponibilidad;
-
-            Habitación NuevaSimple = new Habitación(numerode, precio, Disponibilidad  ,cliente);
-            HabitaciónSimple.Add(NuevaSimple);
-
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"\n Habiación asignada a: {cliente}, Correctamente registrado");
-            Console.ResetColor();
-            Console.WriteLine("Presione cualquier tecla para regresar al menú principal...");
-            Console.ReadKey();
-
-
-
+            NumeroDeCamas = numeroDeCamas;
         }
+
+        public  void MostrarInformacion()
+        {
+            base.MostrarInformacion();
+            Console.WriteLine($"Número de Camas: {NumeroDeCamas}");
+        }
+
     }
+
+}
+
+

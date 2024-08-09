@@ -1,124 +1,181 @@
-﻿using System.Collections.Concurrent;
+﻿using Laboratorio_2;
+using System.Collections.Concurrent;
 using System.Security.AccessControl;
 
 namespace HotelVillaReal
 {
-    class program
+    using System;
+    using System.Collections.Generic;
+
+    namespace HotelManagement
     {
-        static void main(string[] args)
+        class Program
         {
-            try
+            static Managment manejo = new Managment();
+            static Habitación habitacion = new Habitación(0, 0);
+
+            static void Main(string[] args)
             {
-                ShowMenu();
-                Console.Write("Elegir una opcion: ");
-                int option = Convert.ToInt32(Console.ReadLine());
-                switch (option)
+                bool salir = false;
+                while (!salir)
                 {
-                    case 1:
+                    try
+                    {
+                        ShowMenu();
+                        Console.Write("Elegir una opción: ");
+                        int option = Convert.ToInt32(Console.ReadLine());
+
+                        switch (option)
                         {
-                            bool Continuar = true;
-                            while (Continuar)
-                            {
-                                try
+                            case 1:
                                 {
-                                    RoomMenu();
-                                    Console.Write("Seleccionar habitación: ");
-                                    int option1 = Convert.ToInt32(Console.ReadLine());
-                                    switch (option1)
+                                    bool continuar = true;
+                                    while (continuar)
                                     {
-                                        case 1:
+                                        try
+                                        {
+                                            RoomMenu();
+                                            Console.Write("Seleccionar tipo de habitación: ");
+                                            int option1 = Convert.ToInt32(Console.ReadLine());
+
+                                            switch (option1)
                                             {
-
-                                            }break;
-                                            case 2: 
-                                                {
-
-                                                }break;
-                                        case 3:
-                                            {
-
+                                                case 1:
+                                                    manejo.AddSimpleRoom();
+                                                    break;
+                                                case 2:
+                                                    manejo.AddDoubleRoom();
+                                                    break;
+                                                case 3:
+                                                    manejo.AddSuiteRoom();
+                                                    break;
+                                                case 4:
+                                                    manejo.AddDeluxeRoom();
+                                                    break;
+                                                case 5:
+                                                    continuar = false;
+                                                    Console.WriteLine("Presiona Enter para regresar...");
+                                                    break;
+                                                default:
+                                                    Console.WriteLine("Opción no válida.");
+                                                    break;
                                             }
-                                            break;
-                                        case 4:
-                                            {
-
-                                            }
-                                            break;
-                                        case 5:
-                                            {
-                                                Continuar = false;
-                                                Console.WriteLine("Presiona Enter para regresar...");
-                                            }
-                                            break;
-
-
-
-
-
-
-
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine($"Error: {ex.Message}");
+                                        }
+                                        Console.ReadKey();
                                     }
                                 }
-                                catch
+                                break;
+
+                            case 2:
                                 {
-
+                                    Console.Write("Escriba el número de la habitación a eliminar: ");
+                                    int numeroHabitacion = Convert.ToInt32(Console.ReadLine());
+                                    EliminarHabitacion(numeroHabitacion);
                                 }
-                                Console.ReadKey(); 
-                            }
+                                break;
 
-                        }
-                        break;
-                    case 2:
-                        {
+                            case 3:
+                                {
+                                    manejo.ShowRooms();
+                                }
+                                break;
 
-                        }
-                        break;
-                    case 3:
-                        {
+                            case 4:
+                                {
+                                }
+                                break;
 
-                        }
-                        break;
-                    case 4:
-                        {
+                            case 5:
+                                {
+                                    Console.Write("Escriba el número de la habitación a liberar: ");
+                                    int numeroHabitacion = Convert.ToInt32(Console.ReadLine());
+                                    LiberarHabitacion(numeroHabitacion);
+                                }
+                                break;
 
-                        }
-                        break;
-                    case 5:
-                        {
+                            case 6:
+                                {
+                                    salir = true;
+                                    Console.WriteLine("Saliendo del programa...");
+                                }
+                                break;
 
+                            default:
+                                Console.WriteLine("Opción no válida.");
+                                break;
                         }
-                        break;
-                    case 6:
-                        {
-
-                        }
-                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
                 }
             }
-            catch
+
+            static void ShowMenu()
+            {
+                Console.WriteLine("Menu:");
+                Console.WriteLine("1. Agregar habitación");
+                Console.WriteLine("2. Eliminar habitación");
+                Console.WriteLine("3. Mostrar habitaciones");
+                Console.WriteLine("4. Asignar habitación a cliente");
+                Console.WriteLine("5. Liberar habitación");
+                Console.WriteLine("6. Salir");
+            }
+
+            static void RoomMenu()
+            {
+                Console.WriteLine("MENU DE HABITACION:");
+                Console.WriteLine("1. Habitación Simple");
+                Console.WriteLine("2. Habitación Doble");
+                Console.WriteLine("3. Suite");
+                Console.WriteLine("4. Habitación Deluxe");
+                Console.WriteLine("5. Regresar al menú principal");
+            }
+
+            static void EliminarHabitacion(int numero)
             {
 
-            }Console.ReadKey();
-        }
-        static void ShowMenu()
-        {
-            Console.WriteLine("Menu");
-            Console.WriteLine("1. Agregar habitación ");
-            Console.WriteLine("2. Eliminar habitación");
-            Console.WriteLine("3. Mostrar habitación");
-            Console.WriteLine("4. Asignar Habitación a cliente");
-            Console.WriteLine("5. Liberar habitación");
-            Console.WriteLine("6. Salir");
+                var habitacion = manejo.HabitacionesSimples.Find(h => h.NumeroDeHabitacion == numero);
+                manejo.HabitacionesDobles.Find(h => h.NumeroDeHabitacion == numero);
+                manejo.HabitacionesDeluxe.Find(h => h.NumeroDeHabitacion == numero);
+                                 manejo.Suites.Find(h => h.NumeroDeHabitacion == numero);
 
-        }
-        static void RoomMenu()
-        {
-            Console.WriteLine("MENU DE HABITACION");
-            Console.WriteLine("1. Habitacion Simple");
-            Console.WriteLine("2. Habitación doble");
-            Console.WriteLine("3. Suite");
-            Console.WriteLine("4. Habitacion Deluxe");
-            Console.WriteLine("5. Regresar al menú");
+                if (habitacion != null)
+                {
+                    manejo.HabitacionesSimples.RemoveAll(h => h.NumeroDeHabitacion == numero);
+                    manejo.HabitacionesDobles.RemoveAll(h => h.NumeroDeHabitacion == numero);
+                    manejo.HabitacionesDeluxe.RemoveAll(h => h.NumeroDeHabitacion == numero);
+                    manejo.Suites.RemoveAll(h => h.NumeroDeHabitacion == numero);
+                    Console.WriteLine($"Habitación Número {numero} eliminada correctamente.");
+                }
+                else
+                {
+                    Console.WriteLine($"No se encontró la habitación con número {numero}.");
+                }
+            }
+
+            static void LiberarHabitacion(int numero)
+            {
+                var habitacion = manejo.HabitacionesSimples.Find(h => h.NumeroDeHabitacion == numero);
+                manejo.HabitacionesDobles.Find(h => h.NumeroDeHabitacion == numero);
+                manejo.HabitacionesDeluxe.Find(h => h.NumeroDeHabitacion == numero); 
+                                 manejo.Suites.Find(h => h.NumeroDeHabitacion == numero);
+
+                if (habitacion != null && !habitacion.Disponible)
+                {
+                    habitacion.LiberarHabitacion();
+                    Console.WriteLine($"Habitación Número {numero} liberada correctamente.");
+                }
+                else
+                {
+                    Console.WriteLine($"No se pudo liberar la habitación {numero}. Puede estar ya libre o no existir.");
+                }
+            }
         }
     }
 }
